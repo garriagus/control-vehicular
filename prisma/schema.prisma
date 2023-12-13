@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  password      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          Role      @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
+
+//**************************
+//Definición del modelo para la tabla Empleados
+//***************************
+// Definición del modelo para la tabla empleados
+model Empleado {
+  legajo          Int     @id
+  Nombre_completo String
+  telefono        Int?
+  fecha_empleo    String
+  direccion       String?
+  ciudad          String?
+  email           String?
+  Area            String
+  Horario         Int
+  Turno           Int
+  cedula          Int
+
+  Movimiento Movimiento[]
+  Vehiculo   Vehiculo[]
+  // Índices
+}
+
+// Definición del modelo para la tabla movimientos
+model Movimiento {
+  id              Int       @id @default(autoincrement())
+  placa           String
+  tipo            String
+  fecha_llegada   DateTime
+  hora_llegada    DateTime
+  usuario_llegada String
+  fecha_salida    DateTime
+  hora_salida     DateTime
+  usuario_salida  String
+  transcurrido    DateTime
+  empleado        Int?
+  e_s             Boolean
+  empleadoId      Int?
+  Empleado        Empleado? @relation(fields: [empleadoId], references: [legajo])
+}
+
+// Definición del modelo para la tabla vehiculos
+model Vehiculo {
+  id       Int       @id @default(autoincrement())
+  placa    String    @unique
+  tipo     String
+  marca    String
+  modelo   Int
+  color    String
+  empleado Int?
+  Empleado Empleado? @relation(fields: [empleado], references: [legajo])
+}
