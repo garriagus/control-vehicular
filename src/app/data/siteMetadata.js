@@ -3,11 +3,11 @@ const siteMetadata = {
   title: "Garrido Agustín Portfolio",
   author: "Agustín Garrido",
   headerTitle: "Agustín Garrido",
-  description: "Blog de Agustín",
+  description: "Patentes",
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: "http://localhost:3000/",
-  siteRepo: "https://github.com/garriagus/my-blog.git",
+  siteRepo: "https://github.com/garriagus/control-vehicular.git",
   siteLogo: "/images/logo.png",
   socialBanner: "/images/notebook.svg",
   mastodon: "https://mastodon.social/",
