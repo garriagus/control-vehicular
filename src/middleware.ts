@@ -1,7 +1,7 @@
 // Ref: https://next-auth.js.org/configuration/nextjs#advanced-usage
 import { withAuth, NextRequestWithAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
-import type { Role } from "@prisma/client";
+//import type { Role } from "@prisma/client";
 
 export default withAuth(
     // `withAuth` augments your `Request` with the user's token.
@@ -9,9 +9,9 @@ export default withAuth(
         // console.log(request.nextUrl.pathname)
         // console.log(request.nextauth.token)
 
-        if (request.nextUrl.pathname.startsWith("/patentes")
+        if (request.nextUrl.pathname.startsWith("/vehiculos")
             && request.nextauth.token?.role !== "USER") {
-        console.log("este es tu roooooooool ------------->"+request.nextauth.token?.role)
+        //console.log("este es tu roooooooool ------------->"+request.nextauth.token?.role)
             return NextResponse.rewrite(
                 new URL("/denied", request.url)
             )
@@ -34,4 +34,4 @@ export default withAuth(
 
 // Applies next-auth only to matching routes - can be regex
 // Ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-export const config = { matcher: ["/patentes", "/client", "/dashboard"] }
+export const config = { matcher: ["/vehiculos", "/client", "/dashboard"] }

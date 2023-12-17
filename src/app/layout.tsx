@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
-import Navbar from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 //import { ThemeProvider } from "@/app/components/theme-provider";
 import { Space_Grotesk } from "next/font/google";
-import siteMetadata from "@/app/data/siteMetadata";
+import siteMetadata from "@/data/siteMetadata";
 
-import { NextAuthProvider } from "@/app/components/Providers";
+import { Suspense } from "react";
+
+import { NextAuthProvider } from "@/components/Providers";
 const space_grotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
@@ -72,11 +74,14 @@ export default function RootLayout({
         className={`bg-white text-black antialiased dark:bg-gray-950 dark:text-white ${inter.className}`}
       >
         <NextAuthProvider>
-          <Navbar />
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 xl:max-w-5xl xl:px-0 ">
-            <main>{children}</main>
-            <Footer />
-          </div>
+          <Toaster />
+          <Suspense fallback="Loading...">
+            <Navbar />
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 xl:max-w-5xl xl:px-0 ">
+              <main>{children}</main>
+              <Footer />
+            </div>
+          </Suspense>
         </NextAuthProvider>
       </body>
     </html>
