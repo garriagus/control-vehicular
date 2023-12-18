@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
-        <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
+        {/*<div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
           <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
               <div className="flex-1 flex items-center space-x-2">
@@ -1812,7 +1812,7 @@ export default function Page() {
                 </svg>
               </div>
               <input
-                datepicker={5}
+                //datepicker={5}
                 id="datepicker"
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input"
@@ -2173,7 +2173,7 @@ export default function Page() {
 
       <div
         id="delete-modal"
-        tabIndex="-1"
+        tabIndex={1}
         className="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
         <div className="relative w-full h-auto max-w-md max-h-full">
@@ -2233,8 +2233,8 @@ export default function Page() {
               </button>
             </div>
           </div>
-        </div>
-      </div>
+        </div>*/}
+      </section>
     </>
   );
 }

@@ -27,7 +27,7 @@ export default function Form({ type }: { type: "login" | "register" }) {
             }).then(({ error }) => {
               if (error) {
                 setLoading(false);
-                toast.error(error);
+                toast.error("Error en la contraseña");
               } else {
                 router.refresh();
                 router.push("/");
