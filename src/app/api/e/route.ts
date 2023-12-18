@@ -4,6 +4,10 @@ import { prisma } from "@/lib/prisma";
 /*_______________
 user este ejemplo
 https://github.com/mfikricom/CRUD-Next.js-13-Prisma-PostgreSQL/blob/main/app/products/addProduct.tsx
+
+docu oficial:
+
+https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-nextjs-api-routes/src/pages/api/post/index.ts
 __________________*/
 
 export async function GET() {
