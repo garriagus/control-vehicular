@@ -10,12 +10,13 @@ export default withAuth(
         // console.log(request.nextauth.token)
 
         if (request.nextUrl.pathname.startsWith("/vehiculos")
+            && request.nextauth.token?.role !== "ADMIN"
             && request.nextauth.token?.role !== "USER") {
-        //console.log("este es tu roooooooool ------------->"+request.nextauth.token?.role)
+            //console.log("este es tu roooooooool ------------->"+request.nextauth.token?.role)
             return NextResponse.rewrite(
                 new URL("/denied", request.url)
             )
-        }     
+        }
 
         if (request.nextUrl.pathname.startsWith("/client")
             && request.nextauth.token?.role !== "admin"

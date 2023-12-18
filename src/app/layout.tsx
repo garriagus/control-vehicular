@@ -77,10 +77,8 @@ export default function RootLayout({
           <Toaster />
           <Suspense fallback="Loading...">
             <Navbar />
-            <div className="mx-auto max-w-4xl px-4 sm:px-6 xl:max-w-5xl xl:px-0 ">
-              <main>{children}</main>
-              <Footer />
-            </div>
+            <main>{children}</main>
+            <Footer />
           </Suspense>
         </NextAuthProvider>
       </body>

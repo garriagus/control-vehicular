@@ -75,49 +75,30 @@ enum Role {
 //***************************
 // Definición del modelo para la tabla empleados
 model Empleado {
-  legajo          Int     @id
+  id              String  @id @default(cuid())
+  legajo          Int     @unique
   Nombre_completo String
   telefono        Int?
   fecha_empleo    String
   direccion       String?
   ciudad          String?
-  email           String?
+  email           String? @unique
   Area            String
   Horario         Int
   Turno           Int
-  cedula          Int
 
-  Movimiento Movimiento[]
-  Vehiculo   Vehiculo[]
+  Vehiculo Vehiculo[]
   // Índices
-}
-
-// Definición del modelo para la tabla movimientos
-model Movimiento {
-  id              Int       @id @default(autoincrement())
-  placa           String
-  tipo            String
-  fecha_llegada   DateTime
-  hora_llegada    DateTime
-  usuario_llegada String
-  fecha_salida    DateTime
-  hora_salida     DateTime
-  usuario_salida  String
-  transcurrido    DateTime
-  empleado        Int?
-  e_s             Boolean
-  empleadoId      Int?
-  Empleado        Empleado? @relation(fields: [empleadoId], references: [legajo])
 }
 
 // Definición del modelo para la tabla vehiculos
 model Vehiculo {
-  id       Int       @id @default(autoincrement())
-  placa    String    @unique
-  tipo     String
-  marca    String
-  modelo   Int
-  color    String
-  empleado Int?
-  Empleado Empleado? @relation(fields: [empleado], references: [legajo])
+  id         String    @id @default(cuid())
+  patente    String    @unique
+  tipo       String
+  marca      String
+  modelo     String
+  color      String
+  empleadoId String
+  Empleado   Empleado? @relation(fields: [empleadoId], references: [id])
 }
