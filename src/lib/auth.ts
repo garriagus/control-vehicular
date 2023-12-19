@@ -1,4 +1,5 @@
-import { prisma } from '@/app/lib/prisma'
+import { prisma } from '@/lib/prisma'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { compare } from 'bcrypt'
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -7,6 +8,8 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt'
     },
+
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: 'Sign in',
@@ -46,6 +49,7 @@ export const authOptions: NextAuthOptions = {
                     id: user.id + '',
                     email: user.email,
                     name: user.name,
+                    role: user.role,
                     randomKey: 'Hey cool'
                 }
             }
@@ -54,6 +58,7 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         session: ({ session, token }) => {
             console.log('Session Callback', { session, token })
+            session.user.role = token.role as any
             return {
                 ...session,
                 user: {
@@ -67,6 +72,7 @@ export const authOptions: NextAuthOptions = {
             console.log('JWT Callback', { token, user })
             if (user) {
                 const u = user as unknown as any
+                token.role = user.role
                 return {
                     ...token,
                     id: u.id,

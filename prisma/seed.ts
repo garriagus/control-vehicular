@@ -4,9 +4,15 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = [
     {
+<<<<<<< HEAD
         name: 'Ali',
         email: 'alaice@prisma.io',
         password: 'password',
+=======
+        name: 'Alice',
+        email: 'alice@prisma.io',
+        password: '123456',
+>>>>>>> 2e9fe492cb73921ca0874cbb0f9736838acb8c26
 
     },
     {
